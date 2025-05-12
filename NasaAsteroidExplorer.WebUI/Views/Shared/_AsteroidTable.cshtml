@@ -1,0 +1,23 @@
+﻿@model List<NeoAsteroidDto>
+
+<table class="table mt-3">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Magnitude</th>
+            <th>Hazardous?</th>
+            <th>More Info</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var asteroid in Model)
+        {
+            <tr>
+                <td>@asteroid.Name</td>
+                <td>@asteroid.Magnitude</td>
+                <td>@(asteroid.IsHazardous ? "Yes" : "No")</td>
+                <td><a href="@asteroid.Url" target="_blank">Link</a></td>
+            </tr>
+        }
+    </tbody>
+</table>

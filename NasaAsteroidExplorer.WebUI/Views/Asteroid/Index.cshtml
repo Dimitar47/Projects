@@ -1,0 +1,88 @@
+﻿@model AsteroidViewModel
+
+@{
+    ViewBag.Title = "Asteroid List";
+}
+
+@if (!string.IsNullOrEmpty(Model.ErrorMessage))
+{
+    <div class="alert alert-danger">@Model.ErrorMessage</div>
+}
+
+<!-- Filter Form -->
+<form method="get" class="row g-3 mb-4 align-items-center">
+
+    <div class="col-auto">
+        <div class="d-flex flex-column flex-md-row align-items-md-center">
+            <label for="search" class="me-2 mb-1 mb-md-0 fs-5">Search</label>
+            <input type="text" id="search" name="search" value="@Model.Search" class="form-control form-control-lg" />
+        </div>
+    </div>
+
+    <div class="col-auto">
+        <div class="d-flex flex-column flex-md-row align-items-md-center">
+            <label for="startDate" class="me-2 mb-1 mb-md-0 fs-5">From</label>
+            <input type="date" id="startDate" name="startDate" value="@Model.StartDate.ToString("yyyy-MM-dd")" class="form-control form-control-lg" />
+        </div>
+    </div>
+
+    <div class="col-auto">
+        <div class="d-flex flex-column flex-md-row align-items-md-center">
+            <label for="endDate" class="me-2 mb-1 mb-md-0 fs-5">To</label>
+            <input type="date" id="endDate" name="endDate" value="@Model.EndDate.ToString("yyyy-MM-dd")" class="form-control form-control-lg" />
+        </div>
+    </div>
+
+    <div class="col-auto d-flex align-items-center">
+        <div class="form-check mt-2">
+            <input type="checkbox" class="form-check-input" id="onlyHazardous" name="onlyHazardous" value="true" @(Model.OnlyHazardous == true ? "checked" : "") />
+            <label class="form-check-label ms-1 fs-5" for="onlyHazardous">Only Hazardous</label>
+        </div>
+    </div>
+
+    <div class="col-auto">
+        <button type="submit" class="btn btn-primary btn-lg">Filter</button>
+    </div>
+
+</form>
+
+<!-- Asteroid List Table -->
+@if (Model.Asteroids.Count > 0)
+{
+   <a asp-action="ExportToExcel"
+       asp-route-startDate="@Model.StartDate"
+       asp-route-endDate="@Model.EndDate"
+       asp-route-search="@Model.Search"  
+       asp-route-onlyHazardous="@Model.OnlyHazardous"  
+       class="btn btn-primary btn-lg mt-2"> Export to Excel 
+   </a>
+
+    <partial name="_AsteroidTable" model="Model.Asteroids" />
+
+    <!-- Pagination Controls -->
+    @if (Model.TotalPages > 1)
+    {
+        <nav aria-label="Page navigation">
+            <ul class="pagination mt-3">
+                @for (int i = 1; i <= Model.TotalPages; i++)
+                {
+                    <li class="page-item @(i == Model.Page ? "active" : "")">
+                        <a class="page-link"
+                           asp-action="Index"
+                           asp-route-startDate="@Model.StartDate"
+                           asp-route-endDate="@Model.EndDate"
+                           asp-route-search="@Model.Search"
+                           asp-route-onlyHazardous="@Model.OnlyHazardous"
+                           asp-route-page="@i">
+                            @i
+                        </a>
+                    </li>
+                }
+            </ul>
+        </nav>
+    }
+}
+else
+{
+    <p>No asteroids found for the selected date range and filters.</p>
+}
