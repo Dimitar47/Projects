@@ -1,6 +1,6 @@
 # 🌌 Nasa Asteroid Explorer
 
-Nasa Asteroid Explorer is a C#/.NET application that fetches and displays data from NASA's Near-Earth Object Web Service (NeoWs) API. The app retrieves asteroids passing near Earth for a given date range and shows the Astronomy Picture of the Day with support for past periods.
+Nasa Asteroid Explorer is a C#/.NET application that fetches and displays data from NASA's Near-Earth Object Web Service (NeoWs) API - https://api.nasa.gov/. The app retrieves asteroids passing near Earth for a given date range and shows the Astronomy Picture of the Day with support for past periods.
 
 ## 🧱 Project Structure
 
