@@ -49,7 +49,11 @@ dotnet build
 dotnet run --project NasaAsteroidExplorer.WebUI
 ```
 ## 📸 Screenshots
-Add screenshots if applicable here.
+![image](https://github.com/user-attachments/assets/abd0453c-cb0f-4e72-b372-02d0fc2ab264)
+![image](https://github.com/user-attachments/assets/bd93a470-dbdc-40c9-aa4c-7ccd9427c6f0)
+![image](https://github.com/user-attachments/assets/640a7c2e-0151-4baa-bc55-57cfafd71aea)
+![image](https://github.com/user-attachments/assets/2baec701-df25-44e2-9231-c8b5838aad4f)
+
 
 ## 📝 License
 This project is licensed under the MIT License.
