@@ -14,16 +14,30 @@ namespace NasaAsteroidExplorer.Controllers
             apodService = _apodService;
         }
 
-        public async Task<IActionResult> Index(DateTime? date)
+        public async Task<IActionResult> Index(string? routeDate, string? date)
         {
-            if (date.HasValue && date.Value > DateTime.Today)
+            var rawDate = date ?? routeDate;
+
+            if (string.IsNullOrWhiteSpace(rawDate))
+            {
+                rawDate = DateTime.Today.ToString("yyyy-MM-dd");
+            }
+
+            if (!DateTime.TryParse(rawDate, out var parsedDate))
+            {
+                ViewBag.ErrorMessage = "Invalid date format.";
+                return View("Error");
+            }
+
+            if (parsedDate > DateTime.Today)
             {
                 ViewBag.ErrorMessage = ErrorMessages.FutureDate;
                 return View("Error");
             }
+
             try
             {
-                var dto = await apodService.GetApodAsync(date);
+                var dto = await apodService.GetApodAsync(parsedDate);
                 var viewModel = new ApodViewModel
                 {
                     Title = dto.Title,
@@ -41,5 +55,6 @@ namespace NasaAsteroidExplorer.Controllers
                 return View("Error");
             }
         }
+
     }
 }

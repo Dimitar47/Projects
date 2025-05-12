@@ -42,7 +42,7 @@ namespace NasaAsteroidExplorer
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Apod}/{action=Index}/{date?}");
+                pattern: "{controller=Apod}/{action=Index}/{routeDate?}");
 
             app.Run();
         }
